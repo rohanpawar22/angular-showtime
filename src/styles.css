@@ -9,7 +9,7 @@
 
 body{
   font-family: 'Ubuntu', sans-serif;
-  background-color: #000000;
+  background-color:#141414;
   overflow-x: hidden;
 }
 
@@ -20,7 +20,7 @@ body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #141414;
 }
 
 /* Handle */

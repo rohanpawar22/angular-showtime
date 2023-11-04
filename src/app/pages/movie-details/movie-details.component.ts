@@ -17,7 +17,8 @@ export class MovieDetailsComponent implements OnInit {
     private meta:Meta
     ){}
 
-    getMovieDetailResult:any;
+  defaultImg : string = 'assets/default.jpeg'
+  getMovieDetailResult:any;
   getMovieVideoResult:any;
   getMovieCastResult:any;
 
@@ -65,6 +66,14 @@ export class MovieDetailsComponent implements OnInit {
   {
     this.service.getMovieCast(id).subscribe((result)=>{
       this.getMovieCastResult = result.cast;
+      this.getMovieCastResult.map((obj:any)=>{
+        if(obj.profile_path == null || obj.profile_path == "" || obj.profile_path == undefined){
+          obj.profile_path = this.defaultImg
+        }
+        else {
+          obj.profile_path = 'https://image.tmdb.org/t/p/original/' + obj.profile_path
+        }
+      })
     });
   }
 }

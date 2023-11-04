@@ -4,7 +4,7 @@
 }
 
 .navbar .navbar-brand:hover{
-  color: #ff162a;
+  color: #ff1327;
 }
 
 .navbar-nav .nav-item .nav-link{
@@ -12,6 +12,13 @@
 }
 
 .navbar-nav .nav-item .nav-link:hover{
-  color: #ff162a;
+  color: #ffffff;
 }
 
+.active {
+  color: white !important;
+}
+
+.animated-bg {
+  transition: background-color 0.5s ease;
+}

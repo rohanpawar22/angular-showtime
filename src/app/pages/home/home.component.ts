@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { MovieApiService } from 'src/app/service/movie-api.service';
 
@@ -9,37 +9,42 @@ import { MovieApiService } from 'src/app/service/movie-api.service';
 })
 export class HomeComponent implements OnInit {
 
-    constructor(private service:MovieApiService,
-      private title:Title,
-      private meta:Meta
-      ){
-        this.title.setTitle('Home - showtime');
-        this.meta.updateTag({name:'description',content:'watch online movies'});
-      }
+  @ViewChild('movieContainer', { static: true })
+  movieContainer!: ElementRef;
 
-      bannerResult: any = [];
-      trendingMovieResult: any = [];
-      actionMovieResult: any = [];
-      adventureMovieResult: any = [];
-      animationMovieResult: any = [];
-      comedyMovieResult: any = [];
-      documentaryMovieResult: any = [];
-      sciencefictionMovieResult: any = [];
-      thrillerMovieResult: any = [];
+  constructor(private service: MovieApiService,
+    private title: Title,
+    private meta: Meta
+  ) {
+    this.title.setTitle('Home - showtime');
+    this.meta.updateTag({ name: 'description', content: 'watch online movies' });
+  }
 
-    ngOnInit(): void {
-      this.bannerData();
-      this.trendingData();
-      this.actionMovie();
-      this.adventureMovie();
-      this.comedyMovie();
-      this.animationMovie();
-      this.documentaryMovie();
-      this.sciencefictionMovie();
-      this.thrillerMovie();
-    }
+  bannerResult: any = [];
+  trendingMovieResult: any = [];
+  actionMovieResult: any = [];
+  adventureMovieResult: any = [];
+  animationMovieResult: any = [];
+  comedyMovieResult: any = [];
+  documentaryMovieResult: any = [];
+  sciencefictionMovieResult: any = [];
+  thrillerMovieResult: any = [];
 
-      // bannerdata
+
+  ngOnInit(): void {
+    this.bannerData();
+    this.trendingData();
+    this.actionMovie();
+    this.adventureMovie();
+    this.comedyMovie();
+    this.animationMovie();
+    this.documentaryMovie();
+    this.sciencefictionMovie();
+    this.thrillerMovie();
+  }
+
+
+  // bannerdata
   bannerData() {
     this.service.bannerApiData().subscribe((result) => {
       this.bannerResult = result.results;
@@ -59,8 +64,6 @@ export class HomeComponent implements OnInit {
       this.actionMovieResult = result.results;
     });
   }
-
-
 
 
   // adventure
@@ -105,6 +108,16 @@ export class HomeComponent implements OnInit {
   thrillerMovie() {
     this.service.fetchThrillerMovies().subscribe((result) => {
       this.thrillerMovieResult = result.results;
+    });
+  }
+
+
+
+  scrollMovies(offset: number) {
+    const container = this.movieContainer.nativeElement;
+    container.scroll({
+      left: container.scrollLeft + offset,
+      behavior: 'smooth'
     });
   }
 
